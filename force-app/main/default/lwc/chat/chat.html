@@ -1,0 +1,29 @@
+<template>
+    <div class="chat-container">
+        <div class="chat-history">
+            <template for:each={messages} for:item="msg">
+                <div key={msg.id} class="message-bubble ${msg.isUser ? 'user' : 'ai'}">
+                    {msg.content}
+                </div>
+            </template>
+            {isLoading && <div class="loading-indicator">思考中...</div>}
+        </div>
+        
+        <div class="input-area">
+            <lightning-input
+                type="text"
+                value={newMessage}
+                onchange={handleInputChange}
+                placeholder="输入消息..."
+                class="input-field"
+            ></lightning-input>
+            <lightning-button
+                label="发送"
+                onclick={handleSend}
+                variant="brand"
+                class="send-button"
+                disabled={isLoading}
+            ></lightning-button>
+        </div>
+    </div>
+</template>
